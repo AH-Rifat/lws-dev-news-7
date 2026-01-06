@@ -1,26 +1,17 @@
+"use client";
+import Modal from "@/app/components/Modal";
 import { formatCount, formatDate } from "@/app/utils/CustomFormatFunctions";
 import { getNewsBySlug } from "@/lib/news-data";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function newsDetails({ params: { slug } }) {
+export default function NewsDetailsModal({ params: { slug } }) {
   const news = getNewsBySlug(slug);
-
   return (
     <>
-      <main className="mt-12">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <Link
-            href="/"
-            className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white transition hover:border-cyan-300/40 hover:text-cyan-200"
-          >
-            Back to home
-          </Link>
-        </div>
-
+      <Modal>
         <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px]">
           <article className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
-            <div className="rounded-2xl border border-white/10 bg-[var(--surface)] p-6 shadow-[0_24px_50px_rgba(5,8,16,0.55)]">
+            <div className="rounded-2xl border border-white/10 bg-surface p-6 shadow-[0_24px_50px_rgba(5,8,16,0.55">
               <h3 className="text-3xl font-semibold text-white">
                 {news.title}
               </h3>
@@ -58,7 +49,7 @@ export default function newsDetails({ params: { slug } }) {
 
           <aside className="space-y-6">
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
-              <div className="rounded-2xl border border-white/10 bg-[var(--surface)] p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55)]">
+              <div className="rounded-2xl border border-white/10 bg-surface p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55">
                 <h4 className="text-sm font-semibold text-white">Engagement</h4>
                 <div className="mt-4 space-y-3 text-sm text-zinc-300">
                   <div className="flex items-center justify-between">
@@ -128,7 +119,7 @@ export default function newsDetails({ params: { slug } }) {
             </div>
 
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
-              <div className="rounded-2xl border border-white/10 bg-[var(--surface)] p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55)]">
+              <div className="rounded-2xl border border-white/10 bg-surface p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55">
                 <h4 className="text-sm font-semibold text-white">Tags</h4>
                 <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-cyan-200/80">
                   {news.tags.map((tag, index) => (
@@ -144,7 +135,7 @@ export default function newsDetails({ params: { slug } }) {
             </div>
 
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
-              <div className="rounded-2xl border border-white/10 bg-[var(--surface)] p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55)]">
+              <div className="rounded-2xl border border-white/10 bg-surface p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55">
                 <h4 className="text-sm font-semibold text-white">Author</h4>
                 <div className="mt-4 flex items-center gap-3">
                   <div className="rounded-full bg-white/10 p-[2px]">
@@ -173,7 +164,7 @@ export default function newsDetails({ params: { slug } }) {
             </div>
           </aside>
         </div>
-      </main>
+      </Modal>
     </>
   );
 }
