@@ -2,9 +2,14 @@ import { formatCount, formatDate } from "@/app/utils/CustomFormatFunctions";
 import { getNewsBySlug } from "@/lib/news-data";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default function newsDetails({ params: { slug } }) {
   const news = getNewsBySlug(slug);
+
+  if (!news) {
+    return notFound({ slug });
+  }
 
   return (
     <>
