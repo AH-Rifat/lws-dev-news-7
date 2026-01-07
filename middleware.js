@@ -35,5 +35,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/((?!_next).*)"],
+  matcher: ["/((?!api|images|.*\\..*|_next).*)"],
 };
