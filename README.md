@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dev News
 
-## Getting Started
+A simple news portal for developers, showcasing the latest stories and trends in the world of web development.
 
-First, run the development server:
+## Product Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+-   **Internationalization:** Supports multiple languages (English and Bengali).
+-   **Dynamic News Feed:** Fetches and displays a list of news articles.
+-   **Detailed News View:** Each article has its own dedicated page.
+-   **Modal View:** Seamlessly view news articles in a modal without leaving the main page.
+-   **Search Functionality:** (Planned) Users will be able to search for articles.
+
+## Tech Stack with Version
+
+-   **Next.js:** 14.2.35
+-   **React:** 18
+-   **Tailwind CSS:** 3.4.1
+-   **ESLint:** 8
+
+## Running Locally
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/Learn-with-Sumit/batch-4-assignment-7-dev-news-AH-Rifat.git>
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
+4.  Open http://localhost:3000 with your browser to see the result.
+
+## Component Tree Structure
+
+```
+E:\LWS\assignments\batch-4-assignment-7-dev-news-AH-Rifat\
+├───app\
+│   ├───[lang]\
+│   │   ├───layout.js
+│   │   ├───not-found.js
+│   │   ├───page.js
+│   │   ├───(.)news\
+│   │   │   └───[slug]\
+│   │   │       └───page.js
+│   │   ├───components\
+│   │   │   ├───Modal.js
+│   │   │   ├───Header\
+│   │   │   │   └───page.js
+│   │   │   └───NewsList\
+│   │   │       └───page.js
+│   │   ├───dictionaries\
+│   │   │   ├───bn.json
+│   │   │   ├───dictionaries.js
+│   │   │   └───en.json
+│   │   └───news\
+│   │       └───[slug]\
+│   │           ├───not-found.js
+│   │           └───page.js
+│   ├───api\
+│   │   └───news\
+│   │       ├───route.js
+│   │       └───[slug]\
+│   │           └───route.js
+│   ├───utils\
+│   │   └───CustomFormatFunctions.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Live Demo Link
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+[Live link](https://lws-news-dev.netlify.app)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
