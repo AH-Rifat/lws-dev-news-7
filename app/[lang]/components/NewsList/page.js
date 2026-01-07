@@ -1,5 +1,5 @@
 import Image from "next/image";
-import articles from "../../../public/data.json";
+import articles from "../../../../public/data.json";
 import { formatCount, timeAgo } from "@/app/utils/CustomFormatFunctions";
 import Link from "next/link";
 

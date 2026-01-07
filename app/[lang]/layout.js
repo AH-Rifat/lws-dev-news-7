@@ -1,14 +1,15 @@
 import localFont from "next/font/local";
-import "./globals.css";
+import "../globals.css";
 import Header from "./components/Header/page";
+import { getDictionary } from "./dictionaries/dictionaries";
 
 const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
+  src: "../fonts/GeistVF.woff",
   variable: "--font-geist-sans",
   weight: "100 900",
 });
 const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
+  src: "../fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -18,7 +19,8 @@ export const metadata = {
   description: "Latest developer news from the world of web development.",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children, params: { lang } }) {
+  const dictionary = await getDictionary(lang);
   return (
     <html lang="en">
       <body
@@ -32,7 +34,7 @@ export default function RootLayout({ children }) {
           </div>
 
           <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-            <Header />
+            <Header dictionary={dictionary} lang={lang} />
 
             {children}
           </div>

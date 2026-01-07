@@ -1,11 +1,12 @@
-"use client";
-import Modal from "@/app/components/Modal";
 import { formatCount, formatDate } from "@/app/utils/CustomFormatFunctions";
 import { getNewsBySlug } from "@/lib/news-data";
 import Image from "next/image";
-
-export default function NewsDetailsModal({ params: { slug } }) {
+import Modal from "../../components/Modal";
+import { getDictionary } from "../../dictionaries/dictionaries";
+export default async function NewsDetailsModal({ params: { slug, lang } }) {
   const news = getNewsBySlug(slug);
+  const dictionary = await getDictionary(lang);
+
   return (
     <>
       <Modal>
@@ -30,7 +31,9 @@ export default function NewsDetailsModal({ params: { slug } }) {
                   </span>
                 </div>
                 <span className="text-xs text-zinc-500">•</span>
-                <span>Published on {formatDate(news.published_date)}</span>
+                <span>
+                  {dictionary.publishedOn} {formatDate(news.published_date)}
+                </span>
               </div>
               <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
                 <Image
@@ -50,7 +53,9 @@ export default function NewsDetailsModal({ params: { slug } }) {
           <aside className="space-y-6">
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
               <div className="rounded-2xl border border-white/10 bg-surface p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55">
-                <h4 className="text-sm font-semibold text-white">Engagement</h4>
+                <h4 className="text-sm font-semibold text-white">
+                  {dictionary.engagement}
+                </h4>
                 <div className="mt-4 space-y-3 text-sm text-zinc-300">
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-2">
@@ -64,7 +69,7 @@ export default function NewsDetailsModal({ params: { slug } }) {
                           fill="currentColor"
                         />
                       </svg>
-                      Upvotes
+                      {dictionary.upvotes}
                     </span>
                     <span className="text-white">
                       {formatCount(parseInt(news.upvotes))}
@@ -82,7 +87,7 @@ export default function NewsDetailsModal({ params: { slug } }) {
                           fill="currentColor"
                         />
                       </svg>
-                      Downvotes
+                      {dictionary.downvotes}
                     </span>
                     <span className="text-white">
                       {formatCount(parseInt(news.downvotes))}
@@ -109,7 +114,7 @@ export default function NewsDetailsModal({ params: { slug } }) {
                         strokeWidth="1.4"
                       />
                     </svg>
-                    Views
+                    {dictionary.views}
                   </span>
                   <span className="text-white">
                     {formatCount(parseInt(news.views))}
@@ -120,7 +125,9 @@ export default function NewsDetailsModal({ params: { slug } }) {
 
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
               <div className="rounded-2xl border border-white/10 bg-surface p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55">
-                <h4 className="text-sm font-semibold text-white">Tags</h4>
+                <h4 className="text-sm font-semibold text-white">
+                  {dictionary.tags}
+                </h4>
                 <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-cyan-200/80">
                   {news.tags.map((tag, index) => (
                     <span
@@ -136,7 +143,9 @@ export default function NewsDetailsModal({ params: { slug } }) {
 
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
               <div className="rounded-2xl border border-white/10 bg-surface p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55">
-                <h4 className="text-sm font-semibold text-white">Author</h4>
+                <h4 className="text-sm font-semibold text-white">
+                  {dictionary.author}
+                </h4>
                 <div className="mt-4 flex items-center gap-3">
                   <div className="rounded-full bg-white/10 p-[2px]">
                     <Image
@@ -155,7 +164,7 @@ export default function NewsDetailsModal({ params: { slug } }) {
                   </div>
                 </div>
                 <p className="mt-4 text-xs text-zinc-400">
-                  Published on {""}
+                  {dictionary.publishedOn}{" "}
                   <time dateTime={news.published_date}>
                     {formatDate(news.published_date)}
                   </time>

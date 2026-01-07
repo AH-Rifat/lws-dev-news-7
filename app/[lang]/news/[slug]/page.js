@@ -3,9 +3,11 @@ import { getNewsBySlug } from "@/lib/news-data";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { getDictionary } from "../../dictionaries/dictionaries";
 
-export default function newsDetails({ params: { slug } }) {
+export default async function newsDetails({ params: { slug, lang } }) {
   const news = getNewsBySlug(slug);
+  const dictionary = await getDictionary(lang);
 
   if (!news) {
     return notFound({ slug });
@@ -19,7 +21,7 @@ export default function newsDetails({ params: { slug } }) {
             href="/"
             className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white transition hover:border-cyan-300/40 hover:text-cyan-200"
           >
-            Back to home
+            {dictionary.backToHome}
           </Link>
         </div>
 
@@ -44,7 +46,9 @@ export default function newsDetails({ params: { slug } }) {
                   </span>
                 </div>
                 <span className="text-xs text-zinc-500">•</span>
-                <span>Published on {formatDate(news.published_date)}</span>
+                <span>
+                  {dictionary.publishedOn} {formatDate(news.published_date)}
+                </span>
               </div>
               <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
                 <Image
@@ -64,7 +68,9 @@ export default function newsDetails({ params: { slug } }) {
           <aside className="space-y-6">
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
               <div className="rounded-2xl border border-white/10 bg-[var(--surface)] p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55)]">
-                <h4 className="text-sm font-semibold text-white">Engagement</h4>
+                <h4 className="text-sm font-semibold text-white">
+                  {dictionary.engagement}
+                </h4>
                 <div className="mt-4 space-y-3 text-sm text-zinc-300">
                   <div className="flex items-center justify-between">
                     <span className="flex items-center gap-2">
@@ -78,7 +84,7 @@ export default function newsDetails({ params: { slug } }) {
                           fill="currentColor"
                         />
                       </svg>
-                      Upvotes
+                      {dictionary.upvotes}
                     </span>
                     <span className="text-white">
                       {formatCount(parseInt(news.upvotes))}
@@ -96,7 +102,7 @@ export default function newsDetails({ params: { slug } }) {
                           fill="currentColor"
                         />
                       </svg>
-                      Downvotes
+                      {dictionary.downvotes}
                     </span>
                     <span className="text-white">
                       {formatCount(parseInt(news.downvotes))}
@@ -123,7 +129,7 @@ export default function newsDetails({ params: { slug } }) {
                         strokeWidth="1.4"
                       />
                     </svg>
-                    Views
+                    {dictionary.views}
                   </span>
                   <span className="text-white">
                     {formatCount(parseInt(news.views))}
@@ -134,7 +140,9 @@ export default function newsDetails({ params: { slug } }) {
 
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
               <div className="rounded-2xl border border-white/10 bg-[var(--surface)] p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55)]">
-                <h4 className="text-sm font-semibold text-white">Tags</h4>
+                <h4 className="text-sm font-semibold text-white">
+                  {dictionary.tags}
+                </h4>
                 <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-cyan-200/80">
                   {news.tags.map((tag, index) => (
                     <span
@@ -150,7 +158,9 @@ export default function newsDetails({ params: { slug } }) {
 
             <div className="rounded-2xl bg-gradient-to-br from-white/15 via-white/5 to-transparent p-[1px] reveal">
               <div className="rounded-2xl border border-white/10 bg-[var(--surface)] p-5 shadow-[0_24px_50px_rgba(5,8,16,0.55)]">
-                <h4 className="text-sm font-semibold text-white">Author</h4>
+                <h4 className="text-sm font-semibold text-white">
+                  {dictionary.author}
+                </h4>
                 <div className="mt-4 flex items-center gap-3">
                   <div className="rounded-full bg-white/10 p-[2px]">
                     <Image
@@ -169,7 +179,7 @@ export default function newsDetails({ params: { slug } }) {
                   </div>
                 </div>
                 <p className="mt-4 text-xs text-zinc-400">
-                  Published on {""}
+                  {dictionary.publishedOn}{" "}
                   <time dateTime={news.published_date}>
                     {formatDate(news.published_date)}
                   </time>

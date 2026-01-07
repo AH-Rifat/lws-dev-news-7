@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Header() {
+export default async function Header({ dictionary }) {
   return (
     <>
       <header className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -11,9 +11,11 @@ export default function Header() {
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-semibold text-white">Dev News</h1>
+            <h1 className="text-2xl font-semibold text-white">
+              {dictionary.headerTitle}
+            </h1>
             <p className="mt-1 text-sm text-zinc-400">
-              Signals from the builders shaping tomorrow.
+              {dictionary.subheaderTitle}
             </p>
           </div>
         </div>
@@ -39,7 +41,7 @@ export default function Header() {
             </span>
             <input
               type="search"
-              placeholder="Search stories, tags, authors"
+              placeholder={dictionary.searchPlaceholder}
               className="w-full rounded-2xl border border-white/10 bg-white/5 py-3 pl-12 pr-4 text-sm text-white placeholder:text-zinc-500 shadow-[0_10px_30px_rgba(10,10,20,0.35)] outline-none ring-1 ring-transparent transition focus:border-cyan-300/40 focus:ring-cyan-300/20"
             />
           </div>
